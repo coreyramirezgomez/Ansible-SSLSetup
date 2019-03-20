@@ -1,0 +1,47 @@
+---
+# tasks file for ssldeploy
+- name: Assert required variables
+  assert:
+    that:
+            - dest_crt_name is defined 
+            - dest_key_name is defined 
+            - dest_crt_path is defined
+            - dest_key_path is defined
+
+- fail:
+    msg: "Both certificate variable and template definitions found. Please defined one or the other."
+  when:
+    - src_crt_var is defined
+    - src_crt_template_path is defined
+
+- fail:
+    msg: "Both key variable and template definitions found. Please defined one or the other."
+  when:
+    - src_key_var is defined
+    - src_key_template_path is defined
+
+- name: Setup certificate from variable definition
+  command: /bin/true
+  notify: Install certificate from variable
+  when:
+    - src_crt_var is defined
+
+- name: Setup key  from variable definition
+  command: /bin/true
+  notify: Install key from variable
+  when:
+    - src_key_var is defined
+
+- name: Setup certificate from template definition
+  command: /bin/true
+  notify: Install certificate from template
+  when:
+    - src_crt_template_path is defined
+
+- name: Setup key from template definition
+  command: /bin/true
+  notify: Install key from template
+  when:
+    - src_key_template_path is defined
+
+# Generated encrypted var string by ansible-vault encrypt_string --prompt

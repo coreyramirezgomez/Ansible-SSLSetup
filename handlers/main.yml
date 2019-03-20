@@ -1,0 +1,34 @@
+---
+# handlers file for ssldeploy
+- name: Install certificate from template
+  template:
+    src: "{{ src_crt_template_path }}" 
+    dest: "{{ dest_crt_path }}{{ dest_crt_name }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install key from template 
+  template:
+    src: "{{ src_key_template_path }}" 
+    dest: "{{ dest_key_path }}{{ dest_key_name }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install certificate from variable
+  copy:
+    content: "{{ src_crt_var }}"
+    dest: "{{ dest_crt_path }}{{ dest_crt_name }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install key from variable
+  copy:
+    content: "{{ src_key_var }}"
+    dest: "{{ dest_key_path }}{{ dest_key_name }}"
+    owner: root
+    group: root
+    mode: 0644
+

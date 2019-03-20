@@ -1,0 +1,6 @@
+---
+# defaults file for ssldeploy
+dest_crt_path: "/etc/pki/tls/certs/"    # Default path for Redhat systems.
+dest_key_path: "/etc/pki/tls/private/"  # Default path for Redhat systems
+dest_crt_name: "{{ ansible_fqdn }}.cert"
+dest_key_name: "{{ ansible_fqdn }}.key"
